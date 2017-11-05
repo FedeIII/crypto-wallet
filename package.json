@@ -6,7 +6,8 @@
     "author": "Federico Perez <fedelll@gmail.com>",
     "scripts": {
         "do": "webpack",
-        "go": "webpack --watch"
+        "go": "webpack --watch",
+        "test": "karma start"
     },
     "babel": {
         "presets": [
@@ -21,6 +22,11 @@
         "babel-preset-react": "^6.24.1",
         "css-loader": "^0.28.7",
         "extract-text-webpack-plugin": "^3.0.2",
+        "jasmine-core": "^2.8.0",
+        "karma": "^1.7.1",
+        "karma-chrome-launcher": "^2.2.0",
+        "karma-jasmine": "^1.1.0",
+        "karma-webpack": "^2.0.5",
         "node-sass": "^4.6.0",
         "sass-loader": "^6.0.6",
         "style-loader": "^0.19.0",
