@@ -1,8 +1,10 @@
 import {connect} from 'react-redux';
+
 import {CryptoWallet} from 'components/cryptoWallet';
+import {BTC, ETH, LTC} from 'src/constants';
 
 function mapStateToProps (state) {
-    return state;
+    return state[BTC];
 }
 
 

@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function CryptoWallet ({title}) {
+export function CryptoWallet ({price}) {
     return (
-        <div className='title'>
-            {title}
+        <div className='coin'>
+            {price}
         </div>
     );
 }
