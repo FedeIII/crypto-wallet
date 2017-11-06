@@ -27,6 +27,7 @@ module.exports = {
             containers: path.resolve(__dirname, 'src/containers/'),
             components: path.resolve(__dirname, 'src/components/'),
             reducers: path.resolve(__dirname, 'src/reducers/'),
+            services: path.resolve(__dirname, 'src/services/'),
             domain: path.resolve(__dirname, 'src/domain/'),
             styles: path.resolve(__dirname, 'src/styles/')
         }

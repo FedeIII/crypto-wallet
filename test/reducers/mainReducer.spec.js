@@ -1,14 +1,14 @@
 import {mainReducer} from 'reducers/mainReducer';
 
+import {createCoinReducer} from 'reducers/coinReducer';
 import {BTC, ETH, LTC} from 'src/constants';
 
 describe('Main Reducer', () => {
     it('should return the initial state', () => {
-        const expectedCoinState = {price: 6495.66, percentChange: 0.52};
         const expectedState = {
-            [BTC]: expectedCoinState,
-            [ETH]: expectedCoinState,
-            [LTC]: expectedCoinState
+            [BTC]: {name: BTC, price: 0, percentChange: 0},
+            [ETH]: {name: ETH, price: 0, percentChange: 0},
+            [LTC]: {name: LTC, price: 0, percentChange: 0}
         };
 
         const state = mainReducer();

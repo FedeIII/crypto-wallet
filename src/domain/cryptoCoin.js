@@ -1,16 +1,23 @@
-const cryptoCoins = {};
+let cryptoCoins = {};
 
-function getInitialValue () {
+function getInitialValue (name) {
     return {
-        price: 6495.66,
-        percentChange: 0.52
+        name,
+        price: 0,
+        percentChange: 0
     };
 }
 
-function createCryptoCoin () {
-    const current = getInitialValue();
+function createCryptoCoin (name) {
+    const current = getInitialValue(name);
     return {
         getCurrent () {
+            return current;
+        },
+        setCurrent ({price, percentChange}) {
+            current.price = price;
+            current.percentChange = percentChange;
+
             return current;
         }
     };
@@ -18,8 +25,12 @@ function createCryptoCoin () {
 
 export function getCryptoCoin (name) {
     if (!cryptoCoins[name]) {
-        cryptoCoins[name] = createCryptoCoin();
+        cryptoCoins[name] = createCryptoCoin(name);
     }
 
     return cryptoCoins[name];
+}
+
+export function clearAll () {
+    cryptoCoins = {};
 }

@@ -1,11 +1,15 @@
 import {createCoinReducer} from 'reducers/coinReducer';
 
 import * as cryptoCoin from 'domain/cryptoCoin';
+import {receiveCoins} from 'src/actions';
 
 describe('Coin Reducer', () => {
     let coinReducer;
     const coinName = 'anyCoinName';
-    const currentState = 'anyCurrentState';
+    const otherCoinName = 'otherCoinName';
+    const currentState = {stateAttr: 'anyStateAttr'};
+    const newState = {newStateAttr: 'anyNewStateAttr'};
+    const coin = {name: coinName};
 
     beforeEach(() => {
         spyOn(cryptoCoin, 'getCryptoCoin').and.callFake(getCryptoCoinStub);
@@ -13,7 +17,16 @@ describe('Coin Reducer', () => {
         coinReducer = createCoinReducer(coinName);
     });
 
-    it('should return the coin current value on a default action', () => {
+    it('[RECEIVE_COINS] action should the new coin value set', () => {
+        const otherCoin = {name: otherCoinName};
+
+
+        const coinState = coinReducer('any state', receiveCoins([coin, otherCoin]));
+
+        expect(coinState).toEqual(newState);
+    });
+
+    it('[default] action should return the coin current value', () => {
         const coinState = coinReducer('any state', 'default action');
 
         expect(coinState).toEqual(currentState);
@@ -23,9 +36,18 @@ describe('Coin Reducer', () => {
         return jasmine.createSpy('getCurrent').and.returnValue(currentState);
     }
 
+    function createSetCurrentStub () {
+        return jasmine.createSpy('setCurrent').and.callFake(coinValues => {
+            if (coinValues === coin) {
+                return newState;
+            }
+        });
+    }
+
     function createCoinStub () {
         return {
-            getCurrent: createGetCurrentStub()
+            getCurrent: createGetCurrentStub(),
+            setCurrent: createSetCurrentStub()
         };
     }
 
