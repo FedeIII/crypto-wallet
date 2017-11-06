@@ -32,8 +32,8 @@ describe('Coin Reducer', () => {
         expect(coinState).toEqual(currentState);
     });
 
-    function createGetCurrentStub () {
-        return jasmine.createSpy('getCurrent').and.returnValue(currentState);
+    function createGetStateStub () {
+        return jasmine.createSpy('getState').and.returnValue(currentState);
     }
 
     function createSetCurrentStub () {
@@ -46,7 +46,7 @@ describe('Coin Reducer', () => {
 
     function createCoinStub () {
         return {
-            getCurrent: createGetCurrentStub(),
+            getState: createGetStateStub(),
             setCurrent: createSetCurrentStub()
         };
     }

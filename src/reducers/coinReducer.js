@@ -17,10 +17,9 @@ export function createCoinReducer (coinName) {
                         adaptToDomain(coinName, action.payload)
                     )
                 );
-                break;
             default:
                 return Object.assign({},
-                    coin.getCurrent()
+                    coin.getState()
                 );
         }
     }

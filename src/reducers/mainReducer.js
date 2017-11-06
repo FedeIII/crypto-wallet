@@ -10,9 +10,9 @@ const ethereum = getCryptoCoin(ETH);
 const litecoin = getCryptoCoin(LTC);
 
 const initialState = {
-    [BTC]: bitcoin.getCurrent(),
-    [ETH]: ethereum.getCurrent(),
-    [LTC]: litecoin.getCurrent()
+    [BTC]: bitcoin.getState(),
+    [ETH]: ethereum.getState(),
+    [LTC]: litecoin.getState()
 };
 
 const bitcoinReducer = createCoinReducer(BTC);

@@ -1,22 +1,26 @@
 let cryptoCoins = {};
 
-function getInitialValue (name) {
-    return {
-        name,
-        price: 0
-    };
+function getInitialValue () {
+    return 0;
 }
 
 function createCryptoCoin (name) {
-    const current = getInitialValue(name);
-    return {
-        getCurrent () {
-            return current;
-        },
-        setCurrent ({price}) {
-            current.price = price;
+    let current = getInitialValue();
+    const past = [];
 
-            return current;
+    return {
+        getState () {
+            return {
+                name,
+                price: current,
+                past
+            }
+        },
+
+        setCurrent ({price}) {
+            current = price;
+
+            return this.getState();
         }
     };
 }

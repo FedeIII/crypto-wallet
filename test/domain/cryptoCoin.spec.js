@@ -9,9 +9,10 @@ describe('Crypto Coin', () => {
     it('should initialize the coin when first time requested', () => {
         const coin = getCryptoCoin(cryptoCoin);
 
-        expect(coin.getCurrent()).toEqual({
+        expect(coin.getState()).toEqual({
             name: cryptoCoin,
-            price: 0
+            price: 0,
+            past: []
         });
     });
 
@@ -24,7 +25,8 @@ describe('Crypto Coin', () => {
 
         expect(newCoinValues).toEqual({
             name: cryptoCoin,
-            price: newPrice
+            price: newPrice,
+            past: []
         });
     });
 
@@ -36,7 +38,7 @@ describe('Crypto Coin', () => {
 
         const sameCoin = getCryptoCoin(cryptoCoin);
 
-        expect(sameCoin.getCurrent()).toEqual(coin.getCurrent());
+        expect(sameCoin.getState()).toEqual(coin.getState());
     });
 
 });
