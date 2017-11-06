@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 
-import CryptoWallet from 'containers/cryptoWallet';
+import {CryptoWallet} from 'components/cryptoWallet';
 import {mainReducer} from 'reducers/mainReducer';
 import {fetchCoins} from 'src/actions';
 
@@ -23,3 +23,7 @@ ReactDOM.render(
 );
 
 store.dispatch(fetchCoins());
+setInterval(
+    () => store.dispatch(fetchCoins()),
+    30000
+);
