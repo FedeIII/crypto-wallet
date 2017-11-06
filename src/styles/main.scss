@@ -1,3 +1,4 @@
-.coin {
-    font-size: 20px;
-}
+@import 'variables';
+@import 'app',
+        'coins',
+        'coin';

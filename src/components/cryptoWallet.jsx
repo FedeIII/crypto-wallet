@@ -5,7 +5,7 @@ import {BTC, ETH, LTC} from 'src/constants';
 
 export function CryptoWallet () {
     return (
-        <div>
+        <div className='coins'>
             <CoinContainer name={BTC}/>
             <CoinContainer name={ETH}/>
             <CoinContainer name={LTC}/>

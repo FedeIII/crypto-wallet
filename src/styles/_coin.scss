@@ -1,0 +1,31 @@
+.coin {
+    color: $secondary;
+    display: flex;
+    justify-content: flex-end;
+    height: 33%;
+    border-bottom: 1px dotted $secondary;
+    margin: 0 $margin;
+    padding: $padding;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    &__info,
+    &__name {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__info {
+        flex-grow: 2;
+    }
+
+    &__name {
+        font-size: $text-big;
+        flex-basis: 20%;
+        border-left: 1px dotted $secondary;
+    }
+}
