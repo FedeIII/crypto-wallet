@@ -18,6 +18,8 @@ function createCryptoCoin (name) {
         },
 
         setCurrent ({price}) {
+            if (current) past.push(current);
+
             current = price;
 
             return this.getState();

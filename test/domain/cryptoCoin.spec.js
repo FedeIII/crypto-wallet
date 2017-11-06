@@ -3,6 +3,8 @@ import {getCryptoCoin, clearAll} from 'domain/cryptoCoin';
 describe('Crypto Coin', () => {
     const cryptoCoin = 'anyCryptoCoin';
     const newPrice = 'newPrice';
+    const newPrice2 = 'newPrice2';
+    const newPrice3 = 'newPrice3';
 
     beforeEach(clearAll);
 
@@ -27,6 +29,22 @@ describe('Crypto Coin', () => {
             name: cryptoCoin,
             price: newPrice,
             past: []
+        });
+    });
+
+    it('should keep track of past values', () => {
+        const coin = getCryptoCoin(cryptoCoin);
+
+        coin.setCurrent({price: newPrice});
+        coin.setCurrent({price: newPrice2});
+        const newCoinValues = coin.setCurrent({
+            price: newPrice3
+        });
+
+        expect(newCoinValues).toEqual({
+            name: cryptoCoin,
+            price: newPrice3,
+            past: [newPrice, newPrice2]
         });
     });
 

@@ -12,20 +12,44 @@
     }
 
     &__info,
-    &__name {
+    &__name,
+    &__history,
+    &__current,
+    &__price {
         height: 100%;
         display: flex;
-        justify-content: center;
         align-items: center;
+        flex-grow: 0;
+        flex-shrink: 0;
     }
 
     &__info {
-        flex-grow: 2;
+        justify-content: flex-end;
+        font-size: $text-small;
+        flex-basis: 80%;
     }
 
     &__name {
         font-size: $text-big;
+        justify-content: center;
         flex-basis: 20%;
         border-left: 1px dotted $secondary;
+    }
+
+    &__history {
+        flex-basis: 85%;
+        justify-content: flex-end;
+        padding-right: $padding;
+    }
+
+    &__current {
+        justify-content: center;
+        flex-basis: 15%;
+        border-left: 1px dotted $secondary;
+    }
+
+    &__price {
+        margin-left: $margin;
+        flex-basis: 8.7%;
     }
 }

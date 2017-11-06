@@ -29,6 +29,7 @@ module.exports = {
             reducers: path.resolve(__dirname, 'src/reducers/'),
             services: path.resolve(__dirname, 'src/services/'),
             domain: path.resolve(__dirname, 'src/domain/'),
+            utils: path.resolve(__dirname, 'src/utils/'),
             styles: path.resolve(__dirname, 'src/styles/')
         }
     }

@@ -1,18 +1,16 @@
 import React from 'react';
 
-function getCoinInfo (price) {
-    if (price) {
-        return (
-            <div className='coin__info'>{price}</div>
-        );
-    }
-}
+import {CoinHistoryContainer} from 'containers/coinHistory';
+import {CoinCurrentContainer} from 'containers/coinCurrent';
 
-export function Coin (props) {
+export function Coin ({name}) {
     return (
         <div className='coin'>
-            {getCoinInfo(props.price)}
-            <div className='coin__name'>{props.name}</div>
+            <div className='coin__info'>
+                <CoinHistoryContainer name={name}/>
+                <CoinCurrentContainer name={name}/>
+            </div>
+            <div className='coin__name'>{name}</div>
         </div>
     );
 }
