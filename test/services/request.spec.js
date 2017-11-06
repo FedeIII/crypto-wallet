@@ -10,13 +10,9 @@ describe('Requests', () => {
     const coinsResponse = [createBTC(), createETH(), createAnyCoin(), createLTC()];
     const expectedCoins = [expectedBTC(), expectedETH(), expectedLTC()];
     const BTCPrice = 'BTCPrice';
-    const BTCPercent = 'BTCPercent';
     const ETHPrice = 'ETHPrice';
-    const ETHPercent = 'ETHPercent';
     const anyPrice = 'anyPrice';
-    const anyPercent = 'anyPercent';
     const LTCPrice = 'LTCPrice';
-    const LTCPercent = 'LTCPercent';
 
     beforeEach(() => {
         fetchStub = jasmine.createSpy('fetchStub').and.callFake(url => {
@@ -38,56 +34,49 @@ describe('Requests', () => {
     function createBTC () {
         return {
             symbol: BTC,
-            price_eur: BTCPrice,
-            percent_change_1h: BTCPercent
+            price_eur: BTCPrice
         };
     }
 
     function expectedBTC () {
         return {
             name: BTC,
-            price: BTCPrice,
-            percentChange: BTCPercent
+            price: BTCPrice
         };
     };
 
     function createETH () {
         return {
             symbol: ETH,
-            price_eur: ETHPrice,
-            percent_change_1h: ETHPercent
+            price_eur: ETHPrice
         };
     }
 
     function expectedETH () {
         return {
             name: ETH,
-            price: ETHPrice,
-            percentChange: ETHPercent
+            price: ETHPrice
         };
     }
 
     function createLTC () {
         return {
             symbol: LTC,
-            price_eur: LTCPrice,
-            percent_change_1h: LTCPercent
+            price_eur: LTCPrice
         };
     }
 
     function expectedLTC () {
         return {
             name: LTC,
-            price: LTCPrice,
-            percentChange: LTCPercent
+            price: LTCPrice
         };
     }
 
     function createAnyCoin () {
         return {
             symbol: 'AnySymbol',
-            price_eur: anyPrice,
-            percent_change_1h: anyPercent
+            price_eur: anyPrice
         };
     }
 });

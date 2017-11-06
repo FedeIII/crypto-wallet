@@ -3,7 +3,6 @@ import {getCryptoCoin, clearAll} from 'domain/cryptoCoin';
 describe('Crypto Coin', () => {
     const cryptoCoin = 'anyCryptoCoin';
     const newPrice = 'newPrice';
-    const newPercentChange = 'newPercentChange';
 
     beforeEach(clearAll);
 
@@ -12,8 +11,7 @@ describe('Crypto Coin', () => {
 
         expect(coin.getCurrent()).toEqual({
             name: cryptoCoin,
-            price: 0,
-            percentChange: 0
+            price: 0
         });
     });
 
@@ -21,22 +19,19 @@ describe('Crypto Coin', () => {
         const coin = getCryptoCoin(cryptoCoin);
 
         const newCoinValues = coin.setCurrent({
-            price: newPrice,
-            percentChange: newPercentChange
+            price: newPrice
         });
 
         expect(newCoinValues).toEqual({
             name: cryptoCoin,
-            price: newPrice,
-            percentChange: newPercentChange
+            price: newPrice
         });
     });
 
     it('should get the coin after initialized', () => {
         const coin = getCryptoCoin(cryptoCoin);
         const newCoinValues = coin.setCurrent({
-            price: newPrice,
-            percentChange: newPercentChange
+            price: newPrice
         });
 
         const sameCoin = getCryptoCoin(cryptoCoin);

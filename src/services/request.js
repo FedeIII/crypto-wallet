@@ -11,8 +11,7 @@ function adaptCoins (coins) {
             coin.symbol === LTC
         ).map(coin => ({
             name: coin.symbol,
-            price: coin.price_eur,
-            percentChange: coin.percent_change_1h
+            price: coin.price_eur
         }));
 }
 

@@ -3,8 +3,7 @@ let cryptoCoins = {};
 function getInitialValue (name) {
     return {
         name,
-        price: 0,
-        percentChange: 0
+        price: 0
     };
 }
 
@@ -14,9 +13,8 @@ function createCryptoCoin (name) {
         getCurrent () {
             return current;
         },
-        setCurrent ({price, percentChange}) {
+        setCurrent ({price}) {
             current.price = price;
-            current.percentChange = percentChange;
 
             return current;
         }

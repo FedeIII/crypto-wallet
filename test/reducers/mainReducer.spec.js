@@ -6,9 +6,9 @@ import {BTC, ETH, LTC} from 'src/constants';
 describe('Main Reducer', () => {
     it('should return the initial state', () => {
         const expectedState = {
-            [BTC]: {name: BTC, price: 0, percentChange: 0},
-            [ETH]: {name: ETH, price: 0, percentChange: 0},
-            [LTC]: {name: LTC, price: 0, percentChange: 0}
+            [BTC]: {name: BTC, price: 0},
+            [ETH]: {name: ETH, price: 0},
+            [LTC]: {name: LTC, price: 0}
         };
 
         const state = mainReducer();
