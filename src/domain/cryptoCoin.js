@@ -23,6 +23,14 @@ function createCryptoCoin (name) {
             current = price;
 
             return this.getState();
+        },
+
+        getMaxPrice () {
+            return Math.max(current, ...past);
+        },
+
+        getMinPrice () {
+            return Math.min(current, ...past);
         }
     };
 }

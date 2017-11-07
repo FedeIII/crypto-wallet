@@ -1,9 +1,12 @@
 import React from 'react';
 
-function renderPrice (price, i) {
+import {Bar} from 'components/bar';
+
+function renderPrice ({price, barHeightRatio}, i) {
     return (
         <div className='coin__price' key={i}>
-            {price}
+            <span className='coin__span'>{price}</span>
+            <Bar ratio={barHeightRatio}/>
         </div>
     );
 }

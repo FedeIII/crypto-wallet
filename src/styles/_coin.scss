@@ -43,12 +43,15 @@
     }
 
     &__current {
-        justify-content: center;
+        flex-direction: column;
+        justify-content: flex-end;
         flex-basis: 15%;
         border-left: 1px dotted $secondary;
     }
 
     &__price {
+        flex-direction: column;
+        justify-content: flex-end;
         margin-left: $margin;
         flex-basis: 8.7%;
     }

@@ -59,4 +59,24 @@ describe('Crypto Coin', () => {
         expect(sameCoin.getState()).toEqual(coin.getState());
     });
 
+    it('should return the max price in history', () => {
+        const coin = getCryptoCoin(cryptoCoin);
+
+        coin.setCurrent({price: 2});
+        coin.setCurrent({price: 5});
+        coin.setCurrent({price: 3});
+
+        expect(coin.getMaxPrice()).toEqual(5);
+    });
+
+    it('should return the min price in history', () => {
+        const coin = getCryptoCoin(cryptoCoin);
+
+        coin.setCurrent({price: 2});
+        coin.setCurrent({price: 5});
+        coin.setCurrent({price: 3});
+
+        expect(coin.getMinPrice()).toEqual(2);
+    });
+
 });

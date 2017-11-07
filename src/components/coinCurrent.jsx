@@ -1,9 +1,12 @@
 import React from 'react';
 
-export function CoinCurrent ({price}) {
+import {Bar} from 'components/bar';
+
+export function CoinCurrent ({price, barHeightRatio}) {
     return (
         <div className='coin__current'>
-            {price}
+            <span className='coin__span'>{price}</span>
+            <Bar ratio={barHeightRatio}/>
         </div>
     );
 }

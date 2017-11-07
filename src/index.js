@@ -18,7 +18,7 @@ const store = createStore(
 ReactDOM.render(
     <Provider store={store}>
         <CryptoWallet />
-     </Provider>,
+    </Provider>,
     document.querySelector('#app')
 );
 
