@@ -79,4 +79,14 @@ describe('Crypto Coin', () => {
         expect(coin.getMinPrice()).toEqual(2);
     });
 
+    it('should return the mid price in history', () => {
+        const coin = getCryptoCoin(cryptoCoin);
+
+        coin.setCurrent({price: 2});
+        coin.setCurrent({price: 5});
+        coin.setCurrent({price: 3});
+
+        expect(coin.getMidPrice()).toEqual(3.5);
+    });
+
 });

@@ -31,6 +31,10 @@ function createCryptoCoin (name) {
 
         getMinPrice () {
             return Math.min(current, ...past);
+        },
+
+        getMidPrice () {
+            return this.getMinPrice() + (this.getMaxPrice() - this.getMinPrice()) / 2;
         }
     };
 }

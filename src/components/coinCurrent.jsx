@@ -6,7 +6,7 @@ export function CoinCurrent ({price, barHeightRatio}) {
     return (
         <div className='coin__current'>
             <span className='coin__span'>{price}</span>
-            <Bar ratio={barHeightRatio}/>
+            <Bar ratio={barHeightRatio} single/>
         </div>
     );
 }

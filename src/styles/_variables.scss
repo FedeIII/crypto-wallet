@@ -1,5 +1,5 @@
-$primary: #121823;
-$secondary: #f4f6ff;
+$primary: #1e3765;
+$secondary: #d4d6e0;
 
 $margin: 8px;
 $padding: 8px;
@@ -7,6 +7,9 @@ $padding: 8px;
 $text-big: 50px;
 $text-small: 14px;
 
-$bar-width: 36px;
+$bar-width: 16px;
 $bar-max-height: 75%;
 $bar-min-height: 25%;
+
+$border-thin: 1px dotted rgba($secondary, 0.2);
+$border-thick: 1px dotted $secondary;

@@ -8,13 +8,18 @@ $num-ratios: 10;
 }
 
 .bar {
+    z-index: 1;
     bottom: 0;
     width: $bar-width;
-    background-color: red;
+    background-color: $secondary;
 
     @for $ratio from 0 through $num-ratios {
         &--#{$ratio} {
             height: getBarHeight($ratio);
         }
+    }
+
+    &--single {
+        margin-left: 25%;
     }
 }
