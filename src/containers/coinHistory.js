@@ -29,7 +29,7 @@ function adaptHistory (coin) {
         .map(state => addBarHeightRatio(state, maxPrice, minPrice));
 }
 
-function mergeProps (stateProps, dispatchProps, {name}) {
+function mapStateToProps (stateProps, {name}) {
     const coin = getCryptoCoin(name);
 
     return {
@@ -37,8 +37,4 @@ function mergeProps (stateProps, dispatchProps, {name}) {
     };
 }
 
-export const CoinHistoryContainer = connect(
-    state => state,
-    null,
-    mergeProps
-)(CoinHistory);
+export const CoinHistoryContainer = connect(mapStateToProps)(CoinHistory);

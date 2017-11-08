@@ -4,7 +4,7 @@ import {CoinCurrent} from 'components/coinCurrent';
 import {getCryptoCoin} from 'domain/cryptoCoin';
 import {getMinMaxRatio} from 'utils/numbers';
 
-function mergeProps (stateProps, dispatchProps, {name}) {
+function mapStateToProps (stateProps, {name}) {
     const coin = getCryptoCoin(name);
     const price = coin.getState().price;
     const maxPrice = coin.getMaxPrice();
@@ -16,8 +16,4 @@ function mergeProps (stateProps, dispatchProps, {name}) {
     };
 }
 
-export const CoinCurrentContainer = connect(
-    state => state,
-    null,
-    mergeProps
-)(CoinCurrent);
+export const CoinCurrentContainer = connect(mapStateToProps)(CoinCurrent);

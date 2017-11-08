@@ -2,12 +2,8 @@ import {connect} from 'react-redux';
 
 import {Coin} from 'components/coin';
 
-function mergeProps (stateProps, dispatchProps, {name}) {
+function mapStateToProps (stateProps, {name}) {
     return {name};
 }
 
-export const CoinContainer = connect(
-    state => state,
-    null,
-    mergeProps
-)(Coin);
+export const CoinContainer = connect(mapStateToProps)(Coin);

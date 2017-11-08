@@ -18,7 +18,7 @@ function getMinPrice (max, mid, min) {
     return roundTwoDecimals(min);
 }
 
-function mergeProps (stateProps, dispatchProps, {name}) {
+function mapStateToProps (stateProps, {name}) {
     const coin = getCryptoCoin(name);
     const maxPrice = coin.getMaxPrice();
     const midPrice = coin.getMidPrice();
@@ -31,8 +31,4 @@ function mergeProps (stateProps, dispatchProps, {name}) {
     };
 }
 
-export const PriceLinesContainer = connect(
-    state => state,
-    null,
-    mergeProps
-)(PriceLines);
+export const PriceLinesContainer = connect(mapStateToProps)(PriceLines);
