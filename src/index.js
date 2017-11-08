@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 import {CryptoWallet} from 'components/cryptoWallet';
 import {mainReducer} from 'reducers/mainReducer';
 import {fetchCoins} from 'src/actions';
+import {EUR} from 'src/constants';
 
 import styles from 'styles/main.scss';
 
@@ -22,8 +23,8 @@ ReactDOM.render(
     document.querySelector('#app')
 );
 
-store.dispatch(fetchCoins());
+store.dispatch(fetchCoins(EUR));
 setInterval(
-    () => store.dispatch(fetchCoins()),
+    () => store.dispatch(fetchCoins(EUR)),
     30000
 );

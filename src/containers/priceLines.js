@@ -2,20 +2,16 @@ import {connect} from 'react-redux';
 
 import {PriceLines} from 'components/priceLines';
 import {getCryptoCoin} from 'domain/cryptoCoin';
-import {roundTwoDecimals} from 'utils/numbers';
-
-function getMaxPrice (max) {
-    return roundTwoDecimals(max);
-}
+import {formatCurrency} from 'utils/formatCoin';
 
 function getMidPrice (max, mid, min) {
     if (max === min) return 0;
-    return roundTwoDecimals(mid);
+    return formatCurrency(mid);
 }
 
 function getMinPrice (max, mid, min) {
     if (max === min) return 0;
-    return roundTwoDecimals(min);
+    return formatCurrency(min);
 }
 
 function mapStateToProps (stateProps, {name}) {
@@ -25,7 +21,7 @@ function mapStateToProps (stateProps, {name}) {
     const minPrice = coin.getMinPrice();
 
     return {
-        max: getMaxPrice(maxPrice),
+        max: formatCurrency(maxPrice),
         mid: getMidPrice(maxPrice, midPrice, minPrice),
         min: getMinPrice(maxPrice, midPrice, minPrice)
     };

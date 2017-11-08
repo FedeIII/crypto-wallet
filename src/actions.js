@@ -9,9 +9,17 @@ export function receiveCoins (coins) {
     };
 };
 
-export function fetchCoins() {
+export const CHANGE_CURRENCY = 'CHANGE_CURRENCY';
+export function changeCurrency (currency) {
+    return {
+        type: CHANGE_CURRENCY,
+        payload: currency
+    };
+};
+
+export function fetchCoins(currency) {
     return function (dispatch) {
-        return requestCoins(fetch)
+        return requestCoins(fetch, currency)
             .then(coins =>
                 dispatch(receiveCoins(coins))
             );

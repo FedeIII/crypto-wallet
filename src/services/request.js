@@ -3,6 +3,10 @@ import {
     BTC, ETH, LTC
 } from 'src/constants';
 
+function getCoinsUrl (currency) {
+    return COINS_URL.replace(':currency', currency);
+}
+
 function adaptCoins (coins) {
     return coins
         .filter(coin =>
@@ -15,8 +19,8 @@ function adaptCoins (coins) {
         }));
 }
 
-export function requestCoins (fetch) {
-    return fetch(COINS_URL)
+export function requestCoins (fetch, currency) {
+    return fetch(getCoinsUrl(currency))
         .then(response => response.json())
         .then(adaptCoins);
 }

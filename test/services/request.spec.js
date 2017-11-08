@@ -7,6 +7,7 @@ import {
 
 describe('Requests', () => {
     let fetchStub;
+    const currency = 'anyCurrency';
     const coinsResponse = [createBTC(), createETH(), createAnyCoin(), createLTC()];
     const expectedCoins = [expectedBTC(), expectedETH(), expectedLTC()];
     const BTCPrice = 'BTCPrice';
@@ -16,7 +17,7 @@ describe('Requests', () => {
 
     beforeEach(() => {
         fetchStub = jasmine.createSpy('fetchStub').and.callFake(url => {
-            if (url === COINS_URL) {
+            if (url === COINS_URL.replace(':currency', currency)) {
                 return Promise.resolve({
                     json () {return coinsResponse}
                 });
@@ -25,7 +26,7 @@ describe('Requests', () => {
     });
 
     it('should request the coins and parse the response', done => {
-        requestCoins(fetchStub).then(coins => {
+        requestCoins(fetchStub, currency).then(coins => {
             expect(coins).toEqual(expectedCoins);
             done();
         });

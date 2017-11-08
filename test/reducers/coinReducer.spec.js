@@ -17,9 +17,8 @@ describe('Coin Reducer', () => {
         coinReducer = createCoinReducer(coinName);
     });
 
-    it('[RECEIVE_COINS] action should the new coin value set', () => {
+    it('[RECEIVE_COINS] action should return the new coin value set', () => {
         const otherCoin = {name: otherCoinName};
-
 
         const coinState = coinReducer('any state', receiveCoins([coin, otherCoin]));
 

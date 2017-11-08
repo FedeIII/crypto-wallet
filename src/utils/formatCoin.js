@@ -6,3 +6,7 @@ export function formatVariation (variationRatio) {
     const sign = variationRatio > 0 ? '+' : '';
     return sign + roundTwoDecimals(variationRatio * 100) + '%';
 }
+
+export function formatCurrency (value) {
+    return roundTwoDecimals(value) + '€';
+}
