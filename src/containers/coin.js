@@ -7,7 +7,7 @@ function mergeProps (stateProps, dispatchProps, {name}) {
 }
 
 export const CoinContainer = connect(
-    null,
+    state => state,
     null,
     mergeProps
 )(Coin);

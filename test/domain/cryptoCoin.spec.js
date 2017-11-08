@@ -35,16 +35,16 @@ describe('Crypto Coin', () => {
     it('should keep track of past values', () => {
         const coin = getCryptoCoin(cryptoCoin);
 
-        coin.setCurrent({price: newPrice});
-        coin.setCurrent({price: newPrice2});
+        coin.setCurrent({price: 10});
+        coin.setCurrent({price: 12});
         const newCoinValues = coin.setCurrent({
-            price: newPrice3
+            price: 8
         });
 
         expect(newCoinValues).toEqual({
             name: cryptoCoin,
-            price: newPrice3,
-            past: [newPrice, newPrice2]
+            price: 8,
+            past: [{price: 10, variation: 0}, {price: 12, variation: 0.2}]
         });
     });
 
@@ -87,6 +87,15 @@ describe('Crypto Coin', () => {
         coin.setCurrent({price: 3});
 
         expect(coin.getMidPrice()).toEqual(3.5);
+    });
+
+    it('should return the current price variation', () => {
+        const coin = getCryptoCoin(cryptoCoin);
+
+        coin.setCurrent({price: 10});
+        coin.setCurrent({price: 13});
+
+        expect(coin.getVariation()).toEqual(0.3);
     });
 
 });

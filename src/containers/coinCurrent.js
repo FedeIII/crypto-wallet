@@ -1,18 +1,18 @@
 import {connect} from 'react-redux';
 
 import {CoinCurrent} from 'components/coinCurrent';
-import {roundTwoDecimals, getMinMaxRatio} from 'utils/numbers';
 import {getCryptoCoin} from 'domain/cryptoCoin';
+import {getMinMaxRatio} from 'utils/numbers';
 
 function mergeProps (stateProps, dispatchProps, {name}) {
-    const price = stateProps[name].price;
     const coin = getCryptoCoin(name);
+    const price = coin.getState().price;
     const maxPrice = coin.getMaxPrice();
     const minPrice = coin.getMinPrice();
 
     return {
-        price: roundTwoDecimals(price),
-        barHeightRatio: getMinMaxRatio(price, maxPrice, minPrice)
+        variation: coin.getVariation(),
+        barHeightRatio: getMinMaxRatio(price, maxPrice, minPrice),
     };
 }
 

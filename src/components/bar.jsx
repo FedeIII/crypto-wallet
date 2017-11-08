@@ -1,6 +1,6 @@
 import React from 'react';
 
-function getClassName (ratio, single) {
+function getClassName (ratio, modifier, single) {
     let className = 'bar';
 
     if (single) className += ' bar--single';
@@ -9,11 +9,11 @@ function getClassName (ratio, single) {
     else if (ratio < 0) className += ' bar--0';
     else                className += ` bar--${ratio * 10}`;
 
-    return className;
+    return `${className} bar--${modifier}`;
 }
 
-export function Bar ({ratio, single}) {
+export function Bar ({ratio, modifier, single}) {
     return (
-        <div className={getClassName(ratio, single)}></div>
+        <div className={getClassName(ratio, modifier, single)}></div>
     );
 }

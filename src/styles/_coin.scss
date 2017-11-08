@@ -1,5 +1,5 @@
 .coin {
-    color: $secondary;
+    color: $primary-color;
     display: flex;
     justify-content: flex-end;
     height: 33%;
@@ -40,7 +40,7 @@
 
     &__history {
         align-items: center;
-        flex-basis: 85%;
+        flex-basis: 80%;
         justify-content: flex-end;
         padding-right: $padding;
     }
@@ -49,7 +49,7 @@
         align-items: flex-start;
         flex-direction: column;
         justify-content: flex-end;
-        flex-basis: 15%;
+        flex-basis: 20%;
         border-left: $border-thick;
     }
 
@@ -61,6 +61,53 @@
     }
 
     &__span {
-        display: none;
+        text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
+        width: 0;
+        position: relative;
+        padding: 4px;
+        font-weight: bold;
+        border-radius: 10%;
+        margin-bottom: 2 * $margin;
+
+        &::after {
+            content: " ";
+            position: absolute;
+        	left: 50%;
+        	height: 0;
+        	width: 0;
+            border: solid transparent;
+        	border-width: 8px;
+        	margin-left: -8px;
+        }
+
+        &--stable {
+            display: none;
+        }
+
+        &--rise {
+            color: $success-strong;
+            background-color: $success;
+
+            &::after {
+                border-color: rgba($success, 0);
+                border-bottom-color: $success;
+                bottom: 100%;
+            }
+        }
+
+        &--fall {
+            color: $failure-strong;
+            background-color: $failure;
+
+            &::after {
+                border-color: rgba($failure, 0);
+                border-top-color: $failure;
+                top: 100%;
+            }
+        }
+
+        &--single {
+            margin-left: 2 * $margin;
+        }
     }
 }

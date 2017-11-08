@@ -1,5 +1,9 @@
-$primary: #1e3765;
-$secondary: #d4d6e0;
+$background: linear-gradient(80deg, #010810 0%, #205c90 50%, #185488 51%, #000000 100%);
+$primary-color: #d4d6e0;
+$success: #9df19d;
+$success-strong: #00ff00;
+$failure: #ff7171;
+$failure-strong: #ff0000;
 
 $margin: 8px;
 $padding: 8px;
@@ -11,5 +15,5 @@ $bar-width: 16px;
 $bar-max-height: 75%;
 $bar-min-height: 25%;
 
-$border-thin: 1px dotted rgba($secondary, 0.2);
-$border-thick: 1px dotted $secondary;
+$border-thin: 1px dotted rgba($primary-color, 0.2);
+$border-thick: 1px dotted $primary-color;

@@ -2,14 +2,13 @@ import {connect} from 'react-redux';
 
 import {CoinHistory} from 'components/coinHistory';
 import {MAX_HISTORY_ELEMS} from 'src/constants';
-import {roundTwoDecimals, getMinMaxRatio} from 'utils/numbers';
+import {getMinMaxRatio} from 'utils/numbers';
 import {getCryptoCoin} from 'domain/cryptoCoin';
 
-function withBarHeightRatio (price, maxPrice, minPrice) {
-    return {
-        price,
-        barHeightRatio: getMinMaxRatio(price, maxPrice, minPrice)
-    };
+function addBarHeightRatio (state, maxPrice, minPrice) {
+    return Object.assign({
+        barHeightRatio: getMinMaxRatio(state.price, maxPrice, minPrice)
+    }, state);
 }
 
 function pickLastElems (array) {
@@ -21,20 +20,20 @@ function pickLastElems (array) {
     );
 }
 
-function adaptPrices ({past, name}) {
-    const coin = getCryptoCoin(name);
+function adaptHistory (coin) {
+    const coinState = coin.getState();
     const maxPrice = coin.getMaxPrice();
     const minPrice = coin.getMinPrice();
 
-    return pickLastElems(past)
-        .filter(price => price)
-        .map(roundTwoDecimals)
-        .map(price => withBarHeightRatio(price, maxPrice, minPrice));
+    return pickLastElems(coinState.past)
+        .map(state => addBarHeightRatio(state, maxPrice, minPrice));
 }
 
 function mergeProps (stateProps, dispatchProps, {name}) {
+    const coin = getCryptoCoin(name);
+
     return {
-        prices: adaptPrices(stateProps[name])
+        history: adaptHistory(coin)
     };
 }
 
