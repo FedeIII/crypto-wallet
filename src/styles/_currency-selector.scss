@@ -1,0 +1,15 @@
+.currency-selector {
+    position: absolute;
+    top: $margin;
+    left: $margin;
+    z-index: 2;
+
+    &__span {
+        color: $primary-color;
+        margin-right: $margin;
+    }
+
+    &__options {
+        border: 5px solid $secondary-color;
+    }
+}

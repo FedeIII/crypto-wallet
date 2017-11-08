@@ -6,4 +6,7 @@ export const COINS_URL = 'https://api.coinmarketcap.com/v1/ticker/?convert=:curr
 
 export const MAX_HISTORY_ELEMS = 30;
 
+export const USD = 'USD';
 export const EUR = 'EUR';
+export const GBP = 'GBP';
+export const currencies = [USD, EUR, GBP];

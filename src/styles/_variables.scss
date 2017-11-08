@@ -1,5 +1,6 @@
-$background: linear-gradient(80deg, #010810 0%, #205c90 50%, #185488 51%, #000000 100%);
 $primary-color: #d4d6e0;
+$secondary-color: #185488;
+$background: linear-gradient(80deg, #010810 0%, #205c90 50%, $secondary-color 51%, #000000 100%);
 $success: #9df19d;
 $success-strong: #00ff00;
 $failure: #ff7171;
