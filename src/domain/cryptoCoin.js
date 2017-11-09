@@ -12,9 +12,15 @@ function getPastPrices (past) {
     return past.map(state => state.price);
 }
 
+function convertState (convert, state, toCurrency) {
+    return Object.assign({}, state, {
+        price: convert(state.price, toCurrency)
+    });
+}
+
 function createCryptoCoin (name) {
     let current = getInitialValue();
-    const past = [];
+    let past = [];
 
     return {
         getState () {
@@ -54,6 +60,13 @@ function createCryptoCoin (name) {
             if (!past.length) return 0;
             const previous = getLast(past).price;
             return (current - previous) / previous;
+        },
+
+        changeCurrency ({convert, toCurrency}) {
+            past = past.map(state => convertState(convert, state, toCurrency));
+            current = convert(current, toCurrency);
+
+            return this.getState();
         }
     };
 }

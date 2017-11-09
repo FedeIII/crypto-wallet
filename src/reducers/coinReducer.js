@@ -1,4 +1,4 @@
-import {RECEIVE_COINS} from 'src/actions';
+import {RECEIVE_COINS, CONVERT_COINS} from 'src/actions';
 
 import {getCryptoCoin} from 'domain/cryptoCoin';
 
@@ -16,6 +16,10 @@ export function createCoinReducer (coinName) {
                     coin.setCurrent(
                         adaptToDomain(coinName, action.payload)
                     )
+                );
+            case CONVERT_COINS:
+                return Object.assign({},
+                    coin.changeCurrency(action.payload)
                 );
             default:
                 return Object.assign({},

@@ -1,16 +1,20 @@
 import {getCryptoCoin, clearAll} from 'domain/cryptoCoin';
 
 describe('Crypto Coin', () => {
+    let coin;
     const cryptoCoin = 'anyCryptoCoin';
     const newPrice = 'newPrice';
     const newPrice2 = 'newPrice2';
     const newPrice3 = 'newPrice3';
+    const toCurrency = 'toCurrency';
 
-    beforeEach(clearAll);
+    beforeEach(() => {
+        coin = getCryptoCoin(cryptoCoin);
+    });
+
+    afterEach(clearAll);
 
     it('should initialize the coin when first time requested', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         expect(coin.getState()).toEqual({
             name: cryptoCoin,
             price: 0,
@@ -19,8 +23,6 @@ describe('Crypto Coin', () => {
     });
 
     it('should set the new values of the coin', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         const newCoinValues = coin.setCurrent({
             price: newPrice
         });
@@ -33,8 +35,6 @@ describe('Crypto Coin', () => {
     });
 
     it('should keep track of past values', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         coin.setCurrent({price: 10});
         coin.setCurrent({price: 12});
         const newCoinValues = coin.setCurrent({
@@ -49,7 +49,6 @@ describe('Crypto Coin', () => {
     });
 
     it('should get the coin after initialized', () => {
-        const coin = getCryptoCoin(cryptoCoin);
         const newCoinValues = coin.setCurrent({
             price: newPrice
         });
@@ -60,8 +59,6 @@ describe('Crypto Coin', () => {
     });
 
     it('should return the max price in history', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         coin.setCurrent({price: 2});
         coin.setCurrent({price: 5});
         coin.setCurrent({price: 3});
@@ -70,8 +67,6 @@ describe('Crypto Coin', () => {
     });
 
     it('should return the min price in history', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         coin.setCurrent({price: 2});
         coin.setCurrent({price: 5});
         coin.setCurrent({price: 3});
@@ -80,8 +75,6 @@ describe('Crypto Coin', () => {
     });
 
     it('should return the mid price in history', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         coin.setCurrent({price: 2});
         coin.setCurrent({price: 5});
         coin.setCurrent({price: 3});
@@ -90,12 +83,35 @@ describe('Crypto Coin', () => {
     });
 
     it('should return the current price variation', () => {
-        const coin = getCryptoCoin(cryptoCoin);
-
         coin.setCurrent({price: 10});
         coin.setCurrent({price: 13});
 
         expect(coin.getVariation()).toEqual(0.3);
     });
+
+    it('should change the current and past currency', () => {
+        const convert = convertStub;
+
+        coin.setCurrent({price: 10});
+        coin.setCurrent({price: 13});
+        coin.setCurrent({price: 15});
+        coin.setCurrent({price: 17});
+
+        expect(coin.changeCurrency({convert, toCurrency})).toEqual({
+            name: cryptoCoin,
+            price: 18,
+            past: [
+                {price: 11, variation: jasmine.any(Number)},
+                {price: 14, variation: jasmine.any(Number)}, 
+                {price: 16, variation: jasmine.any(Number)}
+            ]
+        })
+    });
+
+    function convertStub (value, param) {
+        if (param === toCurrency) {
+            return value + 1;
+        }
+    }
 
 });

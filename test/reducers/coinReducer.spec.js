@@ -1,7 +1,7 @@
 import {createCoinReducer} from 'reducers/coinReducer';
 
 import * as cryptoCoin from 'domain/cryptoCoin';
-import {receiveCoins} from 'src/actions';
+import {receiveCoins, convertCoins} from 'src/actions';
 
 describe('Coin Reducer', () => {
     let coinReducer;
@@ -9,7 +9,9 @@ describe('Coin Reducer', () => {
     const otherCoinName = 'otherCoinName';
     const currentState = {stateAttr: 'anyStateAttr'};
     const newState = {newStateAttr: 'anyNewStateAttr'};
+    const convertedState = {convertedStateAttr: 'anyConvertedStateAttr'};
     const coin = {name: coinName};
+    const changeCurrencyPayload = 'changeCurrencyPayload';
 
     beforeEach(() => {
         spyOn(cryptoCoin, 'getCryptoCoin').and.callFake(getCryptoCoinStub);
@@ -23,6 +25,12 @@ describe('Coin Reducer', () => {
         const coinState = coinReducer('any state', receiveCoins([coin, otherCoin]));
 
         expect(coinState).toEqual(newState);
+    });
+
+    it('[CONVERT_COINS] action should return coin state converted', () => {
+        const coinState = coinReducer('any state', convertCoins(changeCurrencyPayload, 'any currency'));
+
+        expect(coinState).toEqual(convertedState);
     });
 
     it('[default] action should return the coin current value', () => {
@@ -43,10 +51,19 @@ describe('Coin Reducer', () => {
         });
     }
 
+    function createChangeCurrencyStub () {
+        return jasmine.createSpy('changeCurrency').and.callFake(payload => {
+            if (payload.convert === changeCurrencyPayload) {
+                return convertedState;
+            }
+        });
+    }
+
     function createCoinStub () {
         return {
             getState: createGetStateStub(),
-            setCurrent: createSetCurrentStub()
+            setCurrent: createSetCurrentStub(),
+            changeCurrency: createChangeCurrencyStub()
         };
     }
 

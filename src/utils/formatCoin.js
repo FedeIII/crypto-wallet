@@ -1,4 +1,5 @@
 import {roundTwoDecimals} from 'utils/numbers';
+import {USD, EUR, GBP} from 'src/constants';
 
 export function formatVariation (variationRatio) {
     if (variationRatio === 0) return '';
@@ -7,6 +8,14 @@ export function formatVariation (variationRatio) {
     return sign + roundTwoDecimals(variationRatio * 100) + '%';
 }
 
-export function formatCurrency (value) {
-    return roundTwoDecimals(value) + '€';
+const symboFormatter = {
+    [USD]: value => '$' + value,
+    [EUR]: value => value + '€',
+    [GBP]: value => '£' + value
+};
+
+export function formatCurrency (value, currency) {
+    return symboFormatter[currency](
+        roundTwoDecimals(value)
+    );
 }

@@ -23,8 +23,8 @@ ReactDOM.render(
     document.querySelector('#app')
 );
 
-store.dispatch(fetchCoins(EUR));
+store.dispatch(fetchCoins(store.getState()));
 setInterval(
-    () => store.dispatch(fetchCoins(EUR)),
+    () => store.dispatch(fetchCoins(store.getState())),
     30000
 );

@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
 import {CurrencySelector} from 'components/currencySelector';
-import {changeCurrency} from 'src/actions';
+import {fetchConversion} from 'src/actions';
 
 function mapStateToProps (stateProps) {
     return {
@@ -11,7 +11,7 @@ function mapStateToProps (stateProps) {
 
 function mapDispatchToProps (dispatch) {
     return {
-        onSelect: event => dispatch(changeCurrency(event.target.value))
+        onSelect: event => dispatch(fetchConversion(event.target.value))
     };
 }
 
