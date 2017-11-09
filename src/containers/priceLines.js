@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 
 import {PriceLines} from 'components/priceLines';
-import {getCryptoCoin} from 'domain/cryptoCoin';
+import {cryptoCoin} from 'domain/cryptoCoin';
 import {formatCurrency} from 'utils/formatCoin';
 
 function getMidPrice (max, mid, min, currency) {
@@ -14,16 +14,17 @@ function getMinPrice (max, mid, min, currency) {
     return formatCurrency(min, currency);
 }
 
-function mapStateToProps ({currency}, {name}) {
-    const coin = getCryptoCoin(name);
-    const maxPrice = coin.getMaxPrice();
-    const midPrice = coin.getMidPrice();
-    const minPrice = coin.getMinPrice();
+function mapStateToProps (stateProps, {name}) {
+    const coinState = stateProps[name];
+
+    const maxPrice = cryptoCoin.getMaxPrice(coinState);
+    const midPrice = cryptoCoin.getMidPrice(coinState);
+    const minPrice = cryptoCoin.getMinPrice(coinState);
 
     return {
-        max: formatCurrency(maxPrice, currency),
-        mid: getMidPrice(maxPrice, midPrice, minPrice, currency),
-        min: getMinPrice(maxPrice, midPrice, minPrice, currency)
+        max: formatCurrency(maxPrice, stateProps.currency),
+        mid: getMidPrice(maxPrice, midPrice, minPrice, stateProps.currency),
+        min: getMinPrice(maxPrice, midPrice, minPrice, stateProps.currency)
     };
 }
 

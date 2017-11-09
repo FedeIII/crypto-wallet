@@ -1,11 +1,5 @@
-let cryptoCoins = {};
-
 function getLast (array) {
     return array[array.length - 1];
-}
-
-function getInitialValue () {
-    return 0;
 }
 
 function getPastPrices (past) {
@@ -18,67 +12,58 @@ function convertState (convert, state, toCurrency) {
     });
 }
 
-function createCryptoCoin (name) {
-    let current = getInitialValue();
-    let past = [];
+export const cryptoCoin = {
+    initialize () {
+        return {
+            price: 0,
+            past: []
+        };
+    },
 
-    return {
-        getState () {
-            return {
-                name,
-                price: current,
-                past
-            }
-        },
+    setCurrent (state, {price}) {
+        const past = state.past.slice(0);
 
-        setCurrent ({price}) {
-            if (current) {
-                past.push({
-                    price: current,
-                    variation: this.getVariation()
-                });
-            }
-
-            current = price;
-
-            return this.getState();
-        },
-
-        getMaxPrice () {
-            return Math.max(current, ...getPastPrices(past));
-        },
-
-        getMinPrice () {
-            return Math.min(current, ...getPastPrices(past));
-        },
-
-        getMidPrice () {
-            return this.getMinPrice() + (this.getMaxPrice() - this.getMinPrice()) / 2;
-        },
-
-        getVariation () {
-            if (!past.length) return 0;
-            const previous = getLast(past).price;
-            return (current - previous) / previous;
-        },
-
-        changeCurrency ({convert, toCurrency}) {
-            past = past.map(state => convertState(convert, state, toCurrency));
-            current = convert(current, toCurrency);
-
-            return this.getState();
+        if (state.price) {
+            past.push({
+                price: state.price,
+                variation: this.getVariation(state)
+            });
         }
-    };
-}
 
-export function getCryptoCoin (name) {
-    if (!cryptoCoins[name]) {
-        cryptoCoins[name] = createCryptoCoin(name);
+        return {
+            price,
+            past
+        };
+    },
+
+    getMaxPrice (state) {
+        return Math.max(state.price, ...getPastPrices(state.past));
+    },
+
+    getMinPrice (state) {
+        return Math.min(state.price, ...getPastPrices(state.past));
+    },
+
+    getMidPrice (state) {
+        const min = this.getMinPrice(state);
+        const max = this.getMaxPrice(state);
+
+        return min + (max - min) / 2;
+    },
+
+    getVariation (state) {
+        if (!state.past.length) return 0;
+        const previous = getLast(state.past).price;
+        return (state.price - previous) / previous;
+    },
+
+    changeCurrency (state, {convert, toCurrency}) {
+        const past = state.past.map(pastState => convertState(convert, pastState, toCurrency));
+        const price = convert(state.price, toCurrency);
+
+        return {
+            price,
+            past
+        };
     }
-
-    return cryptoCoins[name];
-}
-
-export function clearAll () {
-    cryptoCoins = {};
-}
+};

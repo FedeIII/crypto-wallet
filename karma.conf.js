@@ -5,8 +5,7 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['jasmine'],
         files: [
-            'test/**/*.spec.js',
-            'test/**/*.spec.jsx'
+            'test/**/*.spec.js'
         ],
         reporters: ['progress'],
         port: 9876,
@@ -18,8 +17,7 @@ module.exports = function(config) {
         concurrency: Infinity,
         webpack: webpackConfig,
         preprocessors: {
-            'test/**/*.spec.js': ['webpack'],
-            'test/**/*.spec.jsx': ['webpack']
+            'test/**/*.spec.js': ['webpack']
         }
     })
 };

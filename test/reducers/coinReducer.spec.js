@@ -1,73 +1,67 @@
 import {createCoinReducer} from 'reducers/coinReducer';
 
-import * as cryptoCoin from 'domain/cryptoCoin';
+import * as cryptoCoinModule from 'domain/cryptoCoin';
 import {receiveCoins, convertCoins} from 'src/actions';
 
 describe('Coin Reducer', () => {
     let coinReducer;
     const coinName = 'anyCoinName';
     const otherCoinName = 'otherCoinName';
-    const currentState = {stateAttr: 'anyStateAttr'};
-    const newState = {newStateAttr: 'anyNewStateAttr'};
-    const convertedState = {convertedStateAttr: 'anyConvertedStateAttr'};
+    const otherCoin = {name: otherCoinName};
     const coin = {name: coinName};
-    const changeCurrencyPayload = 'changeCurrencyPayload';
+    const currentState = {stateAttr: 'stateAttr'};
+    const newCoinState = {newStateAttr: 'newStateAttr'};
+    const convertMock = 'convertMock';
+    const currencyMock = 'currencyMock';
 
     beforeEach(() => {
-        spyOn(cryptoCoin, 'getCryptoCoin').and.callFake(getCryptoCoinStub);
+        cryptoCoinModule.cryptoCoin = createCryptoCoinStub();
 
         coinReducer = createCoinReducer(coinName);
     });
 
     it('[RECEIVE_COINS] action should return the new coin value set', () => {
-        const otherCoin = {name: otherCoinName};
+        const coinState = coinReducer(currentState, receiveCoins([coin, otherCoin]));
 
-        const coinState = coinReducer('any state', receiveCoins([coin, otherCoin]));
-
-        expect(coinState).toEqual(newState);
+        expect(coinState).toEqual(newCoinState);
     });
 
     it('[CONVERT_COINS] action should return coin state converted', () => {
-        const coinState = coinReducer('any state', convertCoins(changeCurrencyPayload, 'any currency'));
+        const coinState = coinReducer(currentState, convertCoins(convertMock, currencyMock));
 
-        expect(coinState).toEqual(convertedState);
+        expect(coinState).toEqual(newCoinState);
     });
 
     it('[default] action should return the coin current value', () => {
-        const coinState = coinReducer('any state', 'default action');
+        const coinState = coinReducer(currentState, 'default action');
 
         expect(coinState).toEqual(currentState);
     });
 
-    function createGetStateStub () {
-        return jasmine.createSpy('getState').and.returnValue(currentState);
-    }
-
     function createSetCurrentStub () {
-        return jasmine.createSpy('setCurrent').and.callFake(coinValues => {
-            if (coinValues === coin) {
-                return newState;
+        return function setCurrentStub (oldState, newState) {
+            if (oldState === currentState && newState === coin) {
+                return newCoinState;
             }
-        });
+        }
     }
 
     function createChangeCurrencyStub () {
-        return jasmine.createSpy('changeCurrency').and.callFake(payload => {
-            if (payload.convert === changeCurrencyPayload) {
-                return convertedState;
+        return function changeCurrencyStub (oldState, {convert, currency}) {
+            if (
+                oldState === currentState &&
+                convert === convertMock &&
+                currency === currencyMock
+            ) {
+                return newCoinState;
             }
-        });
+        }
     }
 
-    function createCoinStub () {
+    function createCryptoCoinStub () {
         return {
-            getState: createGetStateStub(),
             setCurrent: createSetCurrentStub(),
             changeCurrency: createChangeCurrencyStub()
         };
-    }
-
-    function getCryptoCoinStub (name) {
-        if (name === coinName) return createCoinStub();
     }
 });

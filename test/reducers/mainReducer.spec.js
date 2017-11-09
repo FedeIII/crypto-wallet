@@ -10,9 +10,9 @@ describe('Main Reducer', () => {
     it('should return the initial state', () => {
         const expectedState = {
             currency: EUR,
-            [BTC]: {name: BTC, price: 0, past: []},
-            [ETH]: {name: ETH, price: 0, past: []},
-            [LTC]: {name: LTC, price: 0, past: []}
+            [BTC]: {price: 0, past: []},
+            [ETH]: {price: 0, past: []},
+            [LTC]: {price: 0, past: []}
         };
 
         const state = mainReducer();

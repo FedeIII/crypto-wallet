@@ -1,6 +1,6 @@
 {
     "name": "crypto-wallet",
-    "version": "0.3",
+    "version": "1.0",
     "main": "src/index.js",
     "repository": "https://github.com/FedeIII/crypto-wallet.git",
     "author": "Federico Perez <fedelll@gmail.com>",
