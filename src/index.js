@@ -1,30 +1,18 @@
-import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk'
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 
-import {CryptoWallet} from 'components/cryptoWallet';
-import {mainReducer} from 'reducers/mainReducer';
-import {fetchCoins} from 'src/actions';
-import {EUR} from 'src/constants';
-
 import styles from 'styles/main.scss';
 
-const store = createStore(
-    mainReducer,
-    applyMiddleware(thunk)
-);
+import {App} from 'src/app';
 
-ReactDOM.render(
-    <Provider store={store}>
-        <CryptoWallet />
-    </Provider>,
-    document.querySelector('#app')
-);
+const app = App({
+    ReactDOM,
+    createStore,
+    applyMiddleware,
+    thunk,
+    Provider
+});
 
-store.dispatch(fetchCoins(store.getState()));
-setInterval(
-    () => store.dispatch(fetchCoins(store.getState())),
-    30000
-);
+app.startCoinsFetch();
