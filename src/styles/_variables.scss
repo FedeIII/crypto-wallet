@@ -1,4 +1,5 @@
 $primary-color: #d4d6e0;
+$primary-dark: darken($primary-color, 50%);
 $secondary-color: #185488;
 $background: linear-gradient(80deg, #010810 0%, #205c90 50%, $secondary-color 51%, #000000 100%);
 $success: #9df19d;
@@ -11,6 +12,7 @@ $margin: 8px;
 $padding: 8px;
 
 $text-big: 50px;
+$text-medium: 24px;
 $text-small: 14px;
 
 $bar-width: 16px;
@@ -19,3 +21,24 @@ $bar-min-height: 25%;
 
 $border-thin: 1px dotted rgba($primary-color, 0.2);
 $border-thick: 1px dotted $primary-color;
+
+$coin-size: 120px;
+$coin-border: 1px solid black;
+$coin-animation: 6s ease-in-out coin_rotation infinite;
+
+$coin-inner-border: 1px dashed black;
+$coin-outer-border: 1px solid $primary-color;
+$coin-outer-animation: 6s ease-in-out coin_outer_rotation infinite;
+$coin-outer-background: linear-gradient(180deg, $primary-color 0%,rgba(0, 0, 0, 0) 100%);
+
+@keyframes coin_rotation {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(-1); }
+    100% { transform: scaleX(1); }
+}
+
+@keyframes coin_outer_rotation {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(2 * $margin); }
+    100% { transform: translateX(0); }
+}

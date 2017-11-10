@@ -8,14 +8,14 @@ export function formatVariation (variationRatio) {
     return sign + roundTwoDecimals(variationRatio * 100) + '%';
 }
 
-const symboFormatter = {
+const symbolFormatter = {
     [USD]: value => '$' + value,
     [EUR]: value => value + '€',
     [GBP]: value => '£' + value
 };
 
 export function formatCurrency (value, currency) {
-    return symboFormatter[currency](
+    return symbolFormatter[currency](
         roundTwoDecimals(value)
     );
 }
