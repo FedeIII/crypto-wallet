@@ -1,3 +1,5 @@
+import {convert} from 'domain/convertCurrency';
+
 function getLast (array) {
     return array[array.length - 1];
 }
@@ -6,9 +8,9 @@ function getPastPrices (past) {
     return past.map(state => state.price);
 }
 
-function convertState (convert, state, toCurrency) {
+function convertState (state, fromCurrency, toCurrency) {
     return Object.assign({}, state, {
-        price: convert(state.price, toCurrency)
+        price: convert(state.price, fromCurrency, toCurrency)
     });
 }
 
@@ -57,9 +59,11 @@ export const cryptoCoin = {
         return (state.price - previous) / previous;
     },
 
-    changeCurrency (state, {convert, toCurrency}) {
-        const past = state.past.map(pastState => convertState(convert, pastState, toCurrency));
-        const price = convert(state.price, toCurrency);
+    changeCurrency (state, fromCurrency, toCurrency) {
+        const past = state.past.map(
+            pastState => convertState(pastState, fromCurrency, toCurrency)
+        );
+        const price = convert(state.price, fromCurrency, toCurrency);
 
         return {
             price,

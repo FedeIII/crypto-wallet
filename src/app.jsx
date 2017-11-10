@@ -2,7 +2,7 @@ import React from 'react';
 
 import {CryptoWallet} from 'components/cryptoWallet';
 import {mainReducer} from 'reducers/mainReducer';
-import {fetchCoins} from 'src/actions';
+import {fetchCoins, fetchConversion} from 'src/actions';
 
 export function App ({
     ReactDOM,
@@ -25,6 +25,10 @@ export function App ({
     );
 
     return {
+        getConversionRates () {
+            store.dispatch(fetchConversion());
+        },
+
         startCoinsFetch () {
             store.dispatch(fetchCoins(store.getState()));
             setInterval(
@@ -32,6 +36,7 @@ export function App ({
                 30000
             );
         }
+
     };
 
 }

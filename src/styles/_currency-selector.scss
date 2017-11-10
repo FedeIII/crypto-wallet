@@ -7,6 +7,10 @@
     &__span {
         color: $primary-color;
         margin-right: $margin;
+
+        &--loading {
+            color: $loading-text;
+        }
     }
 
     &__options {

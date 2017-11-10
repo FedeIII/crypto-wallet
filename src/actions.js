@@ -2,6 +2,13 @@ import {requestCoins} from 'services/requestCoins';
 import {requestConversion} from 'services/requestConversion';
 import fetch from 'isomorphic-fetch';
 
+export const LOADING_RATES = 'LOADING_RATES';
+export function loadingRates () {
+    return {
+        type: LOADING_RATES
+    };
+}
+
 export const RECEIVE_COINS = 'RECEIVE_COINS';
 export function receiveCoins (coins) {
     return {
@@ -18,11 +25,11 @@ export function changeCurrency (currency) {
     };
 };
 
-export const CONVERT_COINS = 'CONVERT_COINS';
-export function convertCoins (convert, currency) {
+export const CONVERT_READY = 'CONVERT_READY';
+export function convertReady (convert) {
     return {
-        type: CONVERT_COINS,
-        payload: {convert, currency}
+        type: CONVERT_READY,
+        payload: convert
     };
 };
 
@@ -35,14 +42,14 @@ export function fetchCoins ({currency}) {
     }
 }
 
-export function fetchConversion (toCurrency) {
-    return function (dispatch, getState) {
-        const fromCurrency = getState().currency;
-        dispatch(changeCurrency(toCurrency));
+export function fetchConversion () {
+    return function (dispatch) {
 
-        return requestConversion(fetch, fromCurrency, toCurrency)
+        dispatch(loadingRates());
+
+        return requestConversion(fetch)
             .then(convert => dispatch(
-                convertCoins(convert, toCurrency))
+                convertReady(convert))
             );
     }
 }

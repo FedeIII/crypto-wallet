@@ -9,10 +9,10 @@ import {
 describe('Requests Coins', () => {
     let fetchStub;
     const expectedCoins = [expectedBTC(), expectedETH(), expectedLTC()];
-    const BTCPrice = 'BTCPrice';
-    const ETHPrice = 'ETHPrice';
-    const anyPrice = 'anyPrice';
-    const LTCPrice = 'LTCPrice';
+    const BTCPrice = '1';
+    const ETHPrice = '2';
+    const anyPrice = '3';
+    const LTCPrice = '4';
     const eurResponse = [
         {symbol: BTC, price_eur: BTCPrice},
         {symbol: ETH, price_eur: ETHPrice},
@@ -39,9 +39,9 @@ describe('Requests Coins', () => {
     it('should request the coins and parse the response in EUR', done => {
         requestCoins(fetchStub, EUR).then(coins => {
             expect(coins).toEqual([
-                {name: BTC, price: BTCPrice},
-                {name: ETH, price: ETHPrice},
-                {name: LTC, price: LTCPrice}
+                {name: BTC, price: 1},
+                {name: ETH, price: 2},
+                {name: LTC, price: 4}
             ]);
             done();
         });
@@ -50,9 +50,9 @@ describe('Requests Coins', () => {
     it('should request the coins and parse the response in USD', done => {
         requestCoins(fetchStub, USD).then(coins => {
             expect(coins).toEqual([
-                {name: BTC, price: BTCPrice},
-                {name: ETH, price: ETHPrice},
-                {name: LTC, price: LTCPrice}
+                {name: BTC, price: 1},
+                {name: ETH, price: 2},
+                {name: LTC, price: 4}
             ]);
             done();
         });
@@ -61,9 +61,9 @@ describe('Requests Coins', () => {
     it('should request the coins and parse the response in GBP', done => {
         requestCoins(fetchStub, GBP).then(coins => {
             expect(coins).toEqual([
-                {name: BTC, price: BTCPrice},
-                {name: ETH, price: ETHPrice},
-                {name: LTC, price: LTCPrice}
+                {name: BTC, price: 1},
+                {name: ETH, price: 2},
+                {name: LTC, price: 4}
             ]);
             done();
         });

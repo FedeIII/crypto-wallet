@@ -28,7 +28,7 @@ function adaptCoins (coins, currency) {
             coin.symbol === LTC
         ).map(coin => ({
             name: coin.symbol,
-            price: coin[currencyPricemMap[currency]]
+            price: parseFloat(coin[currencyPricemMap[currency]])
         }));
 }
 

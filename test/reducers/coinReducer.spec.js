@@ -1,7 +1,7 @@
 import {createCoinReducer} from 'reducers/coinReducer';
 
 import * as cryptoCoinModule from 'domain/cryptoCoin';
-import {receiveCoins, convertCoins} from 'src/actions';
+import {receiveCoins, changeCurrency} from 'src/actions';
 
 describe('Coin Reducer', () => {
     let coinReducer;
@@ -9,9 +9,13 @@ describe('Coin Reducer', () => {
     const otherCoinName = 'otherCoinName';
     const otherCoin = {name: otherCoinName};
     const coin = {name: coinName};
-    const currentState = {stateAttr: 'stateAttr'};
+    const oldCoinState = {stateAttr: 'stateAttr'};
     const newCoinState = {newStateAttr: 'newStateAttr'};
-    const convertMock = 'convertMock';
+    const oldCurrency = 'oldCurrency';
+    const currentState = {
+        [coinName]: oldCoinState,
+        currency: oldCurrency
+    };
     const currencyMock = 'currencyMock';
 
     beforeEach(() => {
@@ -26,8 +30,8 @@ describe('Coin Reducer', () => {
         expect(coinState).toEqual(newCoinState);
     });
 
-    it('[CONVERT_COINS] action should return coin state converted', () => {
-        const coinState = coinReducer(currentState, convertCoins(convertMock, currencyMock));
+    it('[CHANGE_CURRENCY] action should return coin state converted', () => {
+        const coinState = coinReducer(currentState, changeCurrency(currencyMock));
 
         expect(coinState).toEqual(newCoinState);
     });
@@ -35,23 +39,23 @@ describe('Coin Reducer', () => {
     it('[default] action should return the coin current value', () => {
         const coinState = coinReducer(currentState, 'default action');
 
-        expect(coinState).toEqual(currentState);
+        expect(coinState).toEqual(oldCoinState);
     });
 
     function createSetCurrentStub () {
         return function setCurrentStub (oldState, newState) {
-            if (oldState === currentState && newState === coin) {
+            if (oldState === oldCoinState && newState === coin) {
                 return newCoinState;
             }
         }
     }
 
     function createChangeCurrencyStub () {
-        return function changeCurrencyStub (oldState, {convert, currency}) {
+        return function changeCurrencyStub (oldState, fromCurrency, toCurrency) {
             if (
-                oldState === currentState &&
-                convert === convertMock &&
-                currency === currencyMock
+                oldState === oldCoinState &&
+                fromCurrency === oldCurrency &&
+                toCurrency === currencyMock
             ) {
                 return newCoinState;
             }

@@ -1,17 +1,18 @@
 import {connect} from 'react-redux';
 
 import {CurrencySelector} from 'components/currencySelector';
-import {fetchConversion} from 'src/actions';
+import {changeCurrency} from 'src/actions';
 
 function mapStateToProps (stateProps) {
     return {
         currency: stateProps.currency,
+        loading: stateProps.loadingRates
     };
 }
 
 function mapDispatchToProps (dispatch) {
     return {
-        onSelect: event => dispatch(fetchConversion(event.target.value))
+        onSelect: event => dispatch(changeCurrency(event.target.value))
     };
 }
 

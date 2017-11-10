@@ -1,6 +1,5 @@
 import {mainReducer} from 'reducers/mainReducer';
 
-import {createCoinReducer} from 'reducers/coinReducer';
 import {
     BTC, ETH, LTC,
     EUR
@@ -10,6 +9,7 @@ describe('Main Reducer', () => {
     it('should return the initial state', () => {
         const expectedState = {
             currency: EUR,
+            loadingRates: true,
             [BTC]: {price: 0, past: []},
             [ETH]: {price: 0, past: []},
             [LTC]: {price: 0, past: []}

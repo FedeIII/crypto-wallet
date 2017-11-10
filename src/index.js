@@ -16,3 +16,4 @@ const app = App({
 });
 
 app.startCoinsFetch();
+app.getConversionRates();

@@ -1,4 +1,5 @@
 import {cryptoCoin} from 'domain/cryptoCoin';
+import * as convertCurrency from 'domain/convertCurrency';
 
 describe('Crypto Coin', () => {
     const oldPrice = 3.75;
@@ -13,6 +14,7 @@ describe('Crypto Coin', () => {
     };
 
     const toCurrency = 'toCurrency';
+    const fromCurrency = 'fromCurrency';
 
     it('should initialize the coin when first time requested', () => {
         expect(cryptoCoin.initialize()).toEqual({
@@ -50,9 +52,9 @@ describe('Crypto Coin', () => {
     });
 
     it('should change the current and past currency', () => {
-        const convert = convertStub;
+        spyOn(convertCurrency, 'convert').and.callFake(convertStub);
 
-        expect(cryptoCoin.changeCurrency(oldState, {convert, toCurrency})).toEqual({
+        expect(cryptoCoin.changeCurrency(oldState, fromCurrency, toCurrency)).toEqual({
             price: oldPrice + 1,
             past: oldPast.map(state => ({
                 price: state.price + 1,
@@ -61,8 +63,8 @@ describe('Crypto Coin', () => {
         })
     });
 
-    function convertStub (value, param) {
-        if (param === toCurrency) {
+    function convertStub (value, param1, param2) {
+        if (param1 === fromCurrency && param2 === toCurrency) {
             return value + 1;
         }
     }

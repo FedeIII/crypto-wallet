@@ -1,4 +1,4 @@
-import {RECEIVE_COINS, CONVERT_COINS} from 'src/actions';
+import {RECEIVE_COINS, CHANGE_CURRENCY} from 'src/actions';
 
 import {cryptoCoin} from 'domain/cryptoCoin';
 
@@ -9,20 +9,22 @@ function findCoinNewState (coinName, coins) {
 export function createCoinReducer (coinName) {
 
     return function coinReducer (state, action) {
+        const coinState = state[coinName];
+
         switch (action.type) {
             case RECEIVE_COINS:
                 return Object.assign({},
                     cryptoCoin.setCurrent(
-                        state,
+                        coinState,
                         findCoinNewState(coinName, action.payload)
                     )
                 );
-            case CONVERT_COINS:
+            case CHANGE_CURRENCY:
                 return Object.assign({},
-                    cryptoCoin.changeCurrency(state, action.payload)
+                    cryptoCoin.changeCurrency(coinState, state.currency, action.payload)
                 );
             default:
-                return Object.assign({}, state);
+                return Object.assign({}, coinState);
         }
     }
 }

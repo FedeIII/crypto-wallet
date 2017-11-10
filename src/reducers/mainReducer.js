@@ -7,10 +7,12 @@ import {
 } from 'src/constants';
 
 import {currencyReducer} from 'reducers/currencyReducer';
+import {loadingRatesReducer} from 'reducers/loadingRatesReducer';
 import {createCoinReducer} from 'reducers/coinReducer';
 
 const initialState = {
     currency: EUR,
+    loadingRates: true,
     [BTC]: cryptoCoin.initialize(),
     [ETH]: cryptoCoin.initialize(),
     [LTC]: cryptoCoin.initialize()
@@ -21,10 +23,12 @@ const ethereumReducer = createCoinReducer(ETH);
 const litecoinReducer = createCoinReducer(LTC);
 
 export function mainReducer (state = initialState, action = {}) {
+
     return {
         currency: currencyReducer(state, action),
-        [BTC]: bitcoinReducer(state[BTC], action),
-        [ETH]: ethereumReducer(state[ETH], action),
-        [LTC]: litecoinReducer(state[LTC], action)
+        loadingRates: loadingRatesReducer(state, action),
+        [BTC]: bitcoinReducer(state, action),
+        [ETH]: ethereumReducer(state, action),
+        [LTC]: litecoinReducer(state, action)
     };
 }
