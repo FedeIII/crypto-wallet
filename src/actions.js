@@ -48,8 +48,8 @@ export function fetchConversion () {
         dispatch(loadingRates());
 
         return requestConversion(fetch)
-            .then(convert => dispatch(
-                convertReady(convert))
+            .then(rates => dispatch(
+                convertReady(rates))
             );
     }
 }

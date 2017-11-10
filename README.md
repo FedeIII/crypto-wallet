@@ -11,7 +11,7 @@ Shows real time variations in prices of 3 crypto-currencies
 
 ## To Do
 * ~~Currency selector: to be able to change the currency to compare to.~~
-* Conversion rates: calculate them from initial calls of the cryptocoins API.
+* ~~Conversion rates: calculate them from initial calls of the cryptocoins API.~~
 * Show specific current price somewhere.
 * Coin selector: to be able to change between all possible crypto-coins.
 * Make the number of bars shown in history dependent on screen size.
