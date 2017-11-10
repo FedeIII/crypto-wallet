@@ -68,6 +68,7 @@
         font-weight: bold;
         border-radius: 10%;
         margin-bottom: 2 * $margin;
+        z-index: 2;
 
         &::after {
             content: " ";
